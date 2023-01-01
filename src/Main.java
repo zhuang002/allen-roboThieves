@@ -40,7 +40,7 @@ public class Main {
 		current.add(start);
 		ArrayList<Position> next = new ArrayList<>();
 		int step = 1;
-		state[start.x][start.y] = step;
+		state[start.x][start.y] = 0;
 		
 		
 		while (!current.isEmpty()) {
@@ -90,28 +90,28 @@ public class Main {
 		} else if (map[x][y] == 'U') {
 			if (state[x][y] == -1) {
 				state[x][y] = -2;
-				move(new Position(x,y), -1, 0, step);
+				return move(new Position(x,y), -1, 0, step);
 			} else {
 				return null;
 			}
 		} else if (map[x][y] == 'D') {
 			if (state[x][y] == -1) {
 				state[x][y] = -2;
-				move(new Position(x,y), 1, 0, step);
+				return move(new Position(x,y), 1, 0, step);
 			} else {
 				return null;
 			}
 		} else if (map[x][y] == 'L') {
 			if (state[x][y] == -1) {
 				state[x][y] = -2;
-				move(new Position(x,y), 0, -1, step);
+				return move(new Position(x,y), 0, -1, step);
 			} else {
 				return null;
 			}
 		} else if (map[x][y] == 'R') {
 			if (state[x][y] == -1) {
 				state[x][y] = -2;
-				move(new Position(x,y), 0, 1, step);
+				return move(new Position(x,y), 0, 1, step);
 			} else {
 				return null;
 			}
@@ -126,7 +126,7 @@ public class Main {
 			state[camera.x][camera.y] = -2;
 			//up
 			for (int x = camera.x-1; x>=0; x--) {
-				if (map[x][camera.y]=='.') {
+				if (map[x][camera.y]=='.' || map[x][camera.y]=='S') {
 					state[x][camera.y] = -2;
 				} else if (map[x][camera.y] == 'W') {
 					break;
@@ -134,7 +134,7 @@ public class Main {
 			}
 			//down
 			for (int x = camera.x+1; x<map.length; x++) {
-				if (map[x][camera.y]=='.') {
+				if (map[x][camera.y]=='.' || map[x][camera.y]=='S') {
 					state[x][camera.y] = -2;
 				} else if (map[x][camera.y] == 'W') {
 					break;
@@ -142,7 +142,7 @@ public class Main {
 			}
 			//left
 			for (int y = camera.y-1; y>=0; y--) {
-				if (map[camera.x][y]=='.') {
+				if (map[camera.x][y]=='.' || map[camera.x][y]=='S') {
 					state[camera.x][y] = -2;
 				} else if (map[camera.x][y] == 'W') {
 					break;
@@ -150,7 +150,7 @@ public class Main {
 			}
 			//right
 			for (int y = camera.y+1; y<map[0].length; y++) {
-				if (map[camera.x][y]=='.') {
+				if (map[camera.x][y]=='.' || map[camera.x][y]=='S') {
 					state[camera.x][y] = -2;
 				} else if (map[camera.x][y] == 'W') {
 					break;
